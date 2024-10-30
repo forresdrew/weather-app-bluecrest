@@ -1,0 +1,481 @@
+{
+  "version": "6.0",
+  "nxVersion": "18.0.7",
+  "deps": {},
+  "pathMappings": {},
+  "nxJsonPlugins": [
+    {
+      "name": "@nx/next/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "devTargetName": "dev",
+        "startTargetName": "start",
+        "serveStaticTargetName": "serve-static"
+      }
+    },
+    {
+      "name": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "e2e"
+      }
+    },
+    {
+      "name": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
+      "name": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      }
+    }
+  ],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": ".prettierignore",
+        "hash": "16448050467312557263"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "9430166341120122740"
+      },
+      {
+        "file": "nx.json",
+        "hash": "10840216673157905056"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "17866138117546000433"
+      },
+      {
+        "file": "README.md",
+        "hash": "4272768678739186039"
+      },
+      {
+        "file": ".eslintignore",
+        "hash": "7663861978715868291"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "5443105041930014821"
+      },
+      {
+        "file": "jest.config.ts",
+        "hash": "12333515226966617182"
+      },
+      {
+        "file": ".nvmrc",
+        "hash": "8895284311685162579"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "18364264586821277305"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "16936441711144470533"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "6516810976673135739"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "4422400126597322578"
+      }
+    ],
+    "projectFileMap": {
+      "weather-app-e2e": [
+        {
+          "file": "apps/weather-app-e2e/.eslintrc.json",
+          "hash": "632147010597293032"
+        },
+        {
+          "file": "apps/weather-app-e2e/playwright.config.ts",
+          "hash": "8860812923957447633",
+          "deps": [
+            "npm:@playwright/test",
+            "npm:@nx/playwright",
+            "npm:@nx/devkit"
+          ]
+        },
+        {
+          "file": "apps/weather-app-e2e/project.json",
+          "hash": "7724473717724281417"
+        },
+        {
+          "file": "apps/weather-app-e2e/src/example.spec.ts",
+          "hash": "16019101014373124625",
+          "deps": [
+            "npm:@playwright/test"
+          ]
+        },
+        {
+          "file": "apps/weather-app-e2e/tsconfig.json",
+          "hash": "13413400511057489941"
+        }
+      ],
+      "weather-app": [
+        {
+          "file": "apps/weather-app/.eslintrc.json",
+          "hash": "12506240042891217896"
+        },
+        {
+          "file": "apps/weather-app/cache/d/daemon.log",
+          "hash": "6993260078149751601"
+        },
+        {
+          "file": "apps/weather-app/cache/d/server-process.json",
+          "hash": "15218521600210272749"
+        },
+        {
+          "file": "apps/weather-app/cache/file-map.json",
+          "hash": "4253280137776573180"
+        },
+        {
+          "file": "apps/weather-app/cache/jest.hash",
+          "hash": "16862640349631286900"
+        },
+        {
+          "file": "apps/weather-app/cache/lockfile.hash",
+          "hash": "15577409559223391530"
+        },
+        {
+          "file": "apps/weather-app/cache/nx_files.nxt",
+          "hash": "7505454533411059908"
+        },
+        {
+          "file": "apps/weather-app/cache/parsed-lock-file.json",
+          "hash": "39026810235422644"
+        },
+        {
+          "file": "apps/weather-app/cache/playwright.hash",
+          "hash": "9651741675362602484"
+        },
+        {
+          "file": "apps/weather-app/cache/project-graph.json",
+          "hash": "15224997958933143543"
+        },
+        {
+          "file": "apps/weather-app/cache/run.json",
+          "hash": "9025217347942003593"
+        },
+        {
+          "file": "apps/weather-app/index.d.ts",
+          "hash": "5498222895072842432"
+        },
+        {
+          "file": "apps/weather-app/jest.config.ts",
+          "hash": "14102793814536607731"
+        },
+        {
+          "file": "apps/weather-app/next-env.d.ts",
+          "hash": "5909181270615354023"
+        },
+        {
+          "file": "apps/weather-app/next.config.js",
+          "hash": "17252635002163063865",
+          "deps": [
+            "npm:@nx/next"
+          ]
+        },
+        {
+          "file": "apps/weather-app/package-lock.json",
+          "hash": "10338834230378826546"
+        },
+        {
+          "file": "apps/weather-app/package.json",
+          "hash": "3427434388066429821",
+          "deps": [
+            "npm:@testing-library/react",
+            "npm:axios",
+            "npm:next",
+            "npm:react",
+            "npm:react-dom",
+            "npm:react-icons",
+            "npm:tslib",
+            "npm:@nx/devkit",
+            "npm:@nx/eslint",
+            "npm:@nx/eslint-plugin",
+            "npm:@nx/jest",
+            "npm:@nx/js",
+            "npm:@nx/next",
+            "npm:@nx/playwright",
+            "npm:@nx/workspace",
+            "npm:@playwright/test",
+            "npm:@swc-node/register",
+            "npm:@swc/core",
+            "npm:@swc/helpers",
+            "npm:@types/jest",
+            "npm:@types/node",
+            "npm:@types/react",
+            "npm:@types/react-dom",
+            "npm:@typescript-eslint/eslint-plugin",
+            "npm:@typescript-eslint/parser",
+            "npm:babel-jest",
+            "npm:eslint",
+            "npm:eslint-config-next",
+            "npm:eslint-config-prettier",
+            "npm:eslint-plugin-import",
+            "npm:eslint-plugin-jsx-a11y",
+            "npm:eslint-plugin-playwright",
+            "npm:eslint-plugin-react",
+            "npm:eslint-plugin-react-hooks",
+            "npm:jest",
+            "npm:jest-environment-jsdom",
+            "npm:nx",
+            "npm:prettier",
+            "npm:ts-jest",
+            "npm:ts-node",
+            "npm:typescript"
+          ]
+        },
+        {
+          "file": "apps/weather-app/project.json",
+          "hash": "931100963153561868"
+        },
+        {
+          "file": "apps/weather-app/public/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/weather-app/public/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/weather-app/public/fonts/Sohne-Leicht.otf",
+          "hash": "12040014328661382503"
+        },
+        {
+          "file": "apps/weather-app/specs/index.spec.tsx",
+          "hash": "1288872939091782814",
+          "deps": [
+            "npm:react",
+            "npm:@testing-library/react"
+          ]
+        },
+        {
+          "file": "apps/weather-app/src/app/api/BaseClient.ts",
+          "hash": "13604299523801789828",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/weather-app/src/app/api/WeatherClient.ts",
+          "hash": "7520797617006949258"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/clear-day.svg",
+          "hash": "540296463236719639"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/clear-night.svg",
+          "hash": "10040923068622505515"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/cloudy.svg",
+          "hash": "1360362609295228639"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/fog.svg",
+          "hash": "12631061947174343265"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/hail.svg",
+          "hash": "2255602887685359016"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/partly-cloudy-day.svg",
+          "hash": "17678783828399623259"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/partly-cloudy-night.svg",
+          "hash": "5176843963683656757"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/rain-snow-showers-day.svg",
+          "hash": "5419513514133096972"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/rain-snow-showers-night.svg",
+          "hash": "15219954223057392940"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/rain-snow.svg",
+          "hash": "34735585737905618"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/rain.svg",
+          "hash": "3893720586651087800"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/showers-day.svg",
+          "hash": "10794494046657462698"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/showers-night.svg",
+          "hash": "13856414066188470945"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/sleet.svg",
+          "hash": "18059169735969087061"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/snow-showers-day.svg",
+          "hash": "12390935138173943822"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/snow-showers-night.svg",
+          "hash": "3717504289791983726"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/snow.svg",
+          "hash": "14707239428960076012"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/thunder-rain.svg",
+          "hash": "4984447247120898450"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/thunder-showers-day.svg",
+          "hash": "11296999011099441298"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/thunder-showers-night.svg",
+          "hash": "7843472774246702682"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/thunder.svg",
+          "hash": "14626116646089656339"
+        },
+        {
+          "file": "apps/weather-app/src/app/assets/images/wind.svg",
+          "hash": "1481470942199713290"
+        },
+        {
+          "file": "apps/weather-app/src/app/components/InfoBox/InfoBox.css",
+          "hash": "5388223815447755525"
+        },
+        {
+          "file": "apps/weather-app/src/app/components/InfoBox/InfoBox.tsx",
+          "hash": "5221827761717998158",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/weather-app/src/app/components/PercentageIndicator/PercentageIndicator.css",
+          "hash": "2915964795861277804"
+        },
+        {
+          "file": "apps/weather-app/src/app/components/PercentageIndicator/PercentageIndicator.tsx",
+          "hash": "12337825975495527069",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/weather-app/src/app/config/Secrets.ts",
+          "hash": "6140721040140285606"
+        },
+        {
+          "file": "apps/weather-app/src/app/enums/Unit.ts",
+          "hash": "84233574370158649"
+        },
+        {
+          "file": "apps/weather-app/src/app/global.css",
+          "hash": "8608811779452100590"
+        },
+        {
+          "file": "apps/weather-app/src/app/layout.tsx",
+          "hash": "16988300829192264703"
+        },
+        {
+          "file": "apps/weather-app/src/app/models/Conditions.ts",
+          "hash": "16538595680079045568"
+        },
+        {
+          "file": "apps/weather-app/src/app/models/Forecast.ts",
+          "hash": "5118058695233430685"
+        },
+        {
+          "file": "apps/weather-app/src/app/models/HttpResponseMessage.ts",
+          "hash": "1907887541255331137"
+        },
+        {
+          "file": "apps/weather-app/src/app/page.css",
+          "hash": "4786619528779355986"
+        },
+        {
+          "file": "apps/weather-app/src/app/page.tsx",
+          "hash": "8874719054226879009",
+          "deps": [
+            "npm:react",
+            "npm:react-icons",
+            "npm:next"
+          ]
+        },
+        {
+          "file": "apps/weather-app/src/app/utils/DateUtils.ts",
+          "hash": "17785427798279342806"
+        },
+        {
+          "file": "apps/weather-app/src/app/utils/StringUtils.ts",
+          "hash": "6558037702809693906"
+        },
+        {
+          "file": "apps/weather-app/tsconfig.json",
+          "hash": "8081306693161065054"
+        },
+        {
+          "file": "apps/weather-app/tsconfig.spec.json",
+          "hash": "6922413205408300107"
+        },
+        {
+          "file": "apps/weather-app/cache copy/d/daemon.log",
+          "hash": "10905161909033494130"
+        },
+        {
+          "file": "apps/weather-app/cache copy/project-graph.json",
+          "hash": "15224997958933143543"
+        },
+        {
+          "file": "apps/weather-app/cache copy/jest.hash",
+          "hash": "548597142540691773"
+        },
+        {
+          "file": "apps/weather-app/cache copy/nx_files.nxt",
+          "hash": "7505454533411059908"
+        },
+        {
+          "file": "apps/weather-app/cache copy/d/server-process.json",
+          "hash": "15218521600210272749"
+        },
+        {
+          "file": "apps/weather-app/cache copy/file-map.json",
+          "hash": "7044317185732403447"
+        },
+        {
+          "file": "apps/weather-app/cache copy/lockfile.hash",
+          "hash": "15577409559223391530"
+        },
+        {
+          "file": "apps/weather-app/cache copy/playwright.hash",
+          "hash": "9651741675362602484"
+        },
+        {
+          "file": "apps/weather-app/cache copy/parsed-lock-file.json",
+          "hash": "39026810235422644"
+        },
+        {
+          "file": "apps/weather-app/cache copy/run.json",
+          "hash": "9025217347942003593"
+        }
+      ]
+    }
+  }
+}

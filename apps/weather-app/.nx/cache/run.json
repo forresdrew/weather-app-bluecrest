@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "nx run weather-app:dev",
+    "startTime": "2024-10-30T09:37:02.536Z",
+    "endTime": "2024-10-30T09:37:53.754Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "weather-app:dev",
+      "target": "dev",
+      "projectName": "weather-app",
+      "hash": "16121845440909324224",
+      "startTime": "2024-10-30T09:37:02.539Z",
+      "endTime": "2024-10-30T09:37:53.753Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    }
+  ]
+}

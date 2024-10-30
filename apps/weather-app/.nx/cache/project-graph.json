@@ -1,0 +1,216 @@
+{
+  "nodes": {
+    "weather-app-e2e": {
+      "name": "weather-app-e2e",
+      "type": "lib",
+      "data": {
+        "root": "apps/weather-app-e2e",
+        "targets": {
+          "e2e": {
+            "options": {
+              "cwd": "apps/weather-app-e2e",
+              "command": "playwright test"
+            },
+            "cache": true,
+            "inputs": [
+              "default",
+              "^production"
+            ],
+            "outputs": [
+              "{workspaceRoot}/dist/.playwright/apps/weather-app-e2e/playwright-report",
+              "{workspaceRoot}/dist/.playwright/apps/weather-app-e2e/test-output"
+            ],
+            "executor": "nx:run-commands",
+            "configurations": {}
+          },
+          "e2e-ci--src/example.spec.ts": {
+            "options": {
+              "cwd": "apps/weather-app-e2e",
+              "command": "playwright test src/example.spec.ts"
+            },
+            "cache": true,
+            "inputs": [
+              "default",
+              "^production"
+            ],
+            "outputs": [
+              "{workspaceRoot}/dist/.playwright/apps/weather-app-e2e/playwright-report",
+              "{workspaceRoot}/dist/.playwright/apps/weather-app-e2e/test-output"
+            ],
+            "executor": "nx:run-commands",
+            "configurations": {}
+          },
+          "e2e-ci": {
+            "executor": "nx:noop",
+            "cache": true,
+            "inputs": [
+              "default",
+              "^production"
+            ],
+            "outputs": [
+              "{workspaceRoot}/dist/.playwright/apps/weather-app-e2e/playwright-report",
+              "{workspaceRoot}/dist/.playwright/apps/weather-app-e2e/test-output"
+            ],
+            "dependsOn": [
+              {
+                "target": "e2e-ci--src/example.spec.ts",
+                "projects": "self",
+                "params": "forward"
+              }
+            ],
+            "options": {},
+            "configurations": {}
+          },
+          "lint": {
+            "cache": true,
+            "options": {
+              "cwd": "apps/weather-app-e2e",
+              "command": "eslint ."
+            },
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json",
+              "{workspaceRoot}/apps/weather-app-e2e/.eslintrc.json",
+              "{workspaceRoot}/tools/eslint-rules/**/*",
+              {
+                "externalDependencies": [
+                  "eslint"
+                ]
+              }
+            ],
+            "executor": "nx:run-commands",
+            "configurations": {}
+          }
+        },
+        "name": "weather-app-e2e",
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "apps/weather-app-e2e/src",
+        "implicitDependencies": [
+          "weather-app"
+        ],
+        "tags": []
+      }
+    },
+    "weather-app": {
+      "name": "weather-app",
+      "type": "app",
+      "data": {
+        "root": "apps/weather-app",
+        "name": "weather-app",
+        "targets": {
+          "build": {
+            "options": {
+              "cwd": "apps/weather-app",
+              "command": "next build"
+            },
+            "dependsOn": [
+              "^build"
+            ],
+            "cache": true,
+            "inputs": [
+              "default",
+              "^production",
+              {
+                "externalDependencies": [
+                  "next"
+                ]
+              }
+            ],
+            "outputs": [
+              "{workspaceRoot}/apps/weather-app/.next",
+              "{workspaceRoot}/apps/weather-app/.next/!(cache)"
+            ],
+            "executor": "nx:run-commands",
+            "configurations": {}
+          },
+          "dev": {
+            "options": {
+              "cwd": "apps/weather-app",
+              "command": "next dev"
+            },
+            "executor": "nx:run-commands",
+            "configurations": {}
+          },
+          "start": {
+            "options": {
+              "cwd": "apps/weather-app",
+              "command": "next start"
+            },
+            "dependsOn": [
+              "build"
+            ],
+            "executor": "nx:run-commands",
+            "configurations": {}
+          },
+          "serve-static": {
+            "executor": "@nx/web:file-server",
+            "options": {
+              "buildTarget": "build",
+              "staticFilePath": "apps/weather-app/out",
+              "port": 3000
+            },
+            "configurations": {}
+          },
+          "lint": {
+            "cache": true,
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json",
+              "{workspaceRoot}/apps/weather-app/.eslintrc.json",
+              "{workspaceRoot}/tools/eslint-rules/**/*",
+              {
+                "externalDependencies": [
+                  "eslint"
+                ]
+              }
+            ],
+            "executor": "nx:run-commands",
+            "options": {
+              "cwd": "apps/weather-app",
+              "command": "eslint ."
+            },
+            "configurations": {}
+          },
+          "test": {
+            "options": {
+              "cwd": "apps/weather-app",
+              "command": "jest"
+            },
+            "cache": true,
+            "inputs": [
+              "default",
+              "^production",
+              {
+                "externalDependencies": [
+                  "jest"
+                ]
+              }
+            ],
+            "outputs": [
+              "{workspaceRoot}/coverage/apps/weather-app"
+            ],
+            "executor": "nx:run-commands",
+            "configurations": {}
+          }
+        },
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "apps/weather-app",
+        "projectType": "application",
+        "tags": [],
+        "implicitDependencies": []
+      }
+    }
+  },
+  "externalNodes": {},
+  "dependencies": {
+    "weather-app-e2e": [
+      {
+        "source": "weather-app-e2e",
+        "target": "weather-app",
+        "type": "implicit"
+      }
+    ],
+    "weather-app": []
+  },
+  "version": "6.0"
+}

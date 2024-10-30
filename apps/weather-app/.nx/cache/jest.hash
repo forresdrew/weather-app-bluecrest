@@ -1,0 +1,65 @@
+{
+  "9682220808344178383": {
+    "test": {
+      "command": "jest",
+      "options": {
+        "cwd": "apps/weather-app"
+      },
+      "cache": true,
+      "inputs": [
+        "default",
+        "^production",
+        {
+          "externalDependencies": [
+            "jest"
+          ]
+        }
+      ],
+      "outputs": [
+        "{workspaceRoot}/coverage/apps/weather-app"
+      ]
+    }
+  },
+  "494146140882419366": {
+    "test": {
+      "command": "jest",
+      "options": {
+        "cwd": "apps/weather-app"
+      },
+      "cache": true,
+      "inputs": [
+        "default",
+        "^production",
+        {
+          "externalDependencies": [
+            "jest"
+          ]
+        }
+      ],
+      "outputs": [
+        "{workspaceRoot}/coverage/apps/weather-app"
+      ]
+    }
+  },
+  "15247796229328714463": {
+    "test": {
+      "command": "jest",
+      "options": {
+        "cwd": "apps/weather-app"
+      },
+      "cache": true,
+      "inputs": [
+        "default",
+        "^production",
+        {
+          "externalDependencies": [
+            "jest"
+          ]
+        }
+      ],
+      "outputs": [
+        "{workspaceRoot}/coverage/apps/weather-app"
+      ]
+    }
+  }
+}

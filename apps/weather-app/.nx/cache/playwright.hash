@@ -1,0 +1,53 @@
+{
+  "13760463066082448590": {
+    "e2e": {
+      "command": "playwright test",
+      "options": {
+        "cwd": "{projectRoot}"
+      },
+      "cache": true,
+      "inputs": [
+        "default",
+        "^production"
+      ],
+      "outputs": [
+        "{workspaceRoot}/dist/.playwright/apps/weather-app-e2e/playwright-report",
+        "{workspaceRoot}/dist/.playwright/apps/weather-app-e2e/test-output"
+      ]
+    },
+    "e2e-ci--src/example.spec.ts": {
+      "command": "playwright test src/example.spec.ts",
+      "options": {
+        "cwd": "{projectRoot}"
+      },
+      "cache": true,
+      "inputs": [
+        "default",
+        "^production"
+      ],
+      "outputs": [
+        "{workspaceRoot}/dist/.playwright/apps/weather-app-e2e/playwright-report",
+        "{workspaceRoot}/dist/.playwright/apps/weather-app-e2e/test-output"
+      ]
+    },
+    "e2e-ci": {
+      "executor": "nx:noop",
+      "cache": true,
+      "inputs": [
+        "default",
+        "^production"
+      ],
+      "outputs": [
+        "{workspaceRoot}/dist/.playwright/apps/weather-app-e2e/playwright-report",
+        "{workspaceRoot}/dist/.playwright/apps/weather-app-e2e/test-output"
+      ],
+      "dependsOn": [
+        {
+          "target": "e2e-ci--src/example.spec.ts",
+          "projects": "self",
+          "params": "forward"
+        }
+      ]
+    }
+  }
+}
