@@ -131,7 +131,8 @@ input:focus {
   background-color: #110E1D;
   padding: 16px;
   justify-content: center;
-  padding: 100px
+  padding: 100px;
+  /* overflow: auto; */
 }
 
 .overview-header-row {
@@ -171,7 +172,7 @@ input:focus {
 .overview-row-2,
 .five-day-row {
   display: flex;
-  gap: 15px
+  gap: 15px;
 }
 
 .overview-row-1 .box,

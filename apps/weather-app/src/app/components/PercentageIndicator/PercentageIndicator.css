@@ -1,0 +1,32 @@
+.value-row {
+     display: flex;
+     justify-content: space-between; 
+     align-items: flex-end;
+     margin-top: 6px;
+}
+
+.fixed-width {
+     width: 12px;
+}
+
+.value {
+     margin: 6px 0px;
+}
+
+.percentage-row {
+     display: flex;
+     align-items: center;
+     height: 5px;
+     border-radius: 6px;
+     overflow: hidden;
+     margin: 6px 0px;
+}
+
+.percentage-bar {
+     height: 5px; 
+}
+
+.min-max-row {
+     display: flex;
+     justify-content: space-between;
+}

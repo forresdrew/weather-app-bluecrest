@@ -7,8 +7,8 @@ interface Conditions {
   sunrise: string;
   sunset: string;
   temp: number;
-  tempmax: number;
-  tempmin: number;
+  tempmax?: number;
+  tempmin?: number;
 }
 
 export default Conditions;

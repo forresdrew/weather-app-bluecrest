@@ -1,14 +1,17 @@
 class DateUtils {
-  public static formatDate = (date: Date): string => {
-    if (isNaN(date?.getTime())) {
+  public static formatDate = (dateToFormat: Date): string => {
+    if (isNaN(dateToFormat?.getTime())) {
       return 'Invalid Date';
     }
 
-    return date.toLocaleDateString('en-UK', {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'long',
-    });
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    const day = days[dateToFormat.getDay()];
+    const date = dateToFormat.getDate();
+    const month = months[dateToFormat.getMonth()];
+
+    return day + ', ' + date + ' ' + month;
   };
 
   public static isDateTomorrow = (dateString: string): boolean => {
@@ -24,11 +27,8 @@ class DateUtils {
     return date.getTime() === tomorrow.getTime();
   };
 
-  public static getWeekDay = (dateString: string): string => {
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-    const date = new Date(dateString);
-    return days[date.getDay()];
+  public static getYYYYMMDDDateString = (date: Date): string => {
+    return date.toISOString().split('T')[0];
   };
 }
 
