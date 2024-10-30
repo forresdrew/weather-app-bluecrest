@@ -1,4 +1,3 @@
-'use client';
 import './PercentageIndicator.css';
 import { FunctionComponent } from 'react';
 
@@ -8,8 +7,13 @@ type PercentageIndicatorProps = {
   barColor?: string;
 };
 
+// Reusable component to render % indicator. Will use default color if none is provided in props
 const PercentageIndicator: FunctionComponent<PercentageIndicatorProps> = ({ label, value, barColor }) => {
-  const roundedValue = Math.round(value);
+  // Round value and make sure it is not great than max %
+  let roundedValue = Math.round(value);
+  if (roundedValue > 100) {
+    roundedValue = 100;
+  }
 
   return (
     <div className="box">
@@ -25,7 +29,7 @@ const PercentageIndicator: FunctionComponent<PercentageIndicatorProps> = ({ labe
         <div className="percentage-bar" style={{ flex: roundedValue, backgroundColor: barColor ?? '#1BACFF' }} />
         <div className="percentage-bar" style={{ flex: 100 - roundedValue, backgroundColor: 'white' }} />
       </div>
-      <div className="min-max-row">
+      <div className="min-max-percent-row">
         <p>0</p>
         <p>100</p>
       </div>

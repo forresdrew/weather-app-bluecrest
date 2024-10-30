@@ -1,0 +1,148 @@
+.column {
+    overflow-y: scroll;
+}
+
+.left-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--colorDarkSecondary);
+    padding: 32px;
+}
+.centered-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+}
+
+.unavailable {
+    margin-bottom: 8px;
+}
+
+.retry {
+    color: #1BACFF;
+}
+
+.search-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.todays-weather-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.location-date-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.location-container {
+    margin-bottom: 24px;
+}
+
+.weather-image-container {
+    margin: 48px 0px;
+}
+
+.weather-image {
+    width: 75%; 
+    height: auto; 
+}
+
+.today-temp-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    gap: 4px;
+}
+
+.right-column {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--colorDark);
+    padding: 48px 100px;
+}
+
+.overview-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.overview-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.unit-buttons-row {
+    display: flex;
+    gap: 8px;
+}
+
+.box-sub-row {
+    display: flex; 
+    flex: 1; 
+    gap: 15px;
+}
+
+@media (max-width: 948px) {
+    .column {
+        overflow-y: visible;
+    }
+    .todays-weather-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .weather-image-container {
+        margin: 12px 0px;
+    }
+    .location-container {
+        margin-bottom: 8px;
+    }
+    .today-temp-row {
+        margin-bottom: 0px;
+    }
+    .weather-image {
+        width: 50%; 
+    }
+    .right-column {
+        padding: 48px;
+    }
+}
+
+@media (max-width: 548px) {
+    .column {
+        overflow-y: visible;
+    }
+    .todays-weather-container {
+        flex-direction: column;
+    }
+    .right-column {
+        padding: 24px;
+    }
+    .weather-image-container {
+        margin-top: 32px;
+        margin-bottom: 16px;
+    }
+    .weather-image {
+        width: 30%; 
+    }
+}

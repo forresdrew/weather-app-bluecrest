@@ -1,0 +1,35 @@
+.forecast-header {
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+.condition-container {
+    display: flex;
+    justify-content: center;
+}
+
+.forecast-date {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.forecast-image-container {
+    width: 80%;
+    padding-top: 80%;
+    position: relative;
+}
+
+.forecast-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.min-max-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+}

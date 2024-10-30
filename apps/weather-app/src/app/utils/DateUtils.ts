@@ -1,5 +1,7 @@
+// Extendable class of static methods for formatting and processing dates
 class DateUtils {
-  public static formatDate = (dateToFormat: Date): string => {
+  // Format date for display purposes
+  public static formatDateDDDddMMM = (dateToFormat: Date): string => {
     if (isNaN(dateToFormat?.getTime())) {
       return 'Invalid Date';
     }
@@ -14,6 +16,7 @@ class DateUtils {
     return day + ', ' + date + ' ' + month;
   };
 
+  // Returns true if passed dateString is tomorrow
   public static isDateTomorrow = (dateString: string): boolean => {
     const today = new Date();
     const date = new Date(dateString);
@@ -25,10 +28,6 @@ class DateUtils {
     tomorrow.setDate(today.getDate() + 1);
 
     return date.getTime() === tomorrow.getTime();
-  };
-
-  public static getYYYYMMDDDateString = (date: Date): string => {
-    return date.toISOString().split('T')[0];
   };
 }
 

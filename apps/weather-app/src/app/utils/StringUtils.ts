@@ -1,3 +1,4 @@
+// Extendable class of static methods for formatting and processing strings
 class StringUtils {
   public static splitLocationString = (location: string): [string, string] => {
     const [primary, ...secondaries] = location.split(',');
