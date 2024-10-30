@@ -134,6 +134,7 @@
     }
     .todays-weather-container {
         flex-direction: column;
+        margin-top: 32px;
     }
     .right-column {
         padding: 24px;

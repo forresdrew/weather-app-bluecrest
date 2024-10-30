@@ -23,6 +23,7 @@ const Weather: FunctionComponent = () => {
   const [weatherForecast, setWeatherForecast] = useState<WeatherForecast | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [overviewIsVisible, setOverviewIsVisible] = useState(false);
+  const [forecastUnavailable, setForecastUnavailable] = useState(false);
   const [loadError, setLoadError] = useState<unknown>(null);
 
   // Extract initial location and number of upcoming days to forecast for easy editing
@@ -33,8 +34,9 @@ const Weather: FunctionComponent = () => {
     // If nothing is in the search box just search initial location
     const searchLocation = location.trim() === '' ? initialLocation : location;
 
-    // Stop showing error and start showing loading indicator
+    // Stop showing error/unavailable and start showing loading indicator
     setLoadError(false);
+    setForecastUnavailable(false);
     setIsSearching(true);
 
     try {
@@ -49,17 +51,22 @@ const Weather: FunctionComponent = () => {
 
       const forecast = weatherResponse.data as WeatherForecast;
 
-      /* With more time I would do both the below steps in a much more typesafe way accounting for empty array / unsorted data */
+      // Set forecast to unavailable if a response has come through with no resolved location
+      if (!forecast.resolvedAddress) {
+        setForecastUnavailable(true);
+      } else {
+        /* With more time I would do both the below steps in a much more typesafe way accounting for empty array / unsorted data */
 
-      // Set currentConditions property to associated object from days array
-      forecast.currentConditions = { ...forecast.days[0] } as Conditions;
+        // Set currentConditions property to associated object from days array
+        forecast.currentConditions = { ...forecast.days[0] } as Conditions;
 
-      // Filter current day from upcoming days so we don't render it in 5 day forecast
-      forecast.days.shift();
+        // Filter current day from upcoming days so we don't render it in 5 day forecast
+        forecast.days.shift();
 
-      // Load forecast into state and show overview column
-      setWeatherForecast(forecast);
-      setOverviewIsVisible(true);
+        // Load forecast into state and show overview column
+        setWeatherForecast(forecast);
+        setOverviewIsVisible(true);
+      }
     } catch (error) {
       // Store error in state for use in render tree
       setLoadError(error);
@@ -103,9 +110,16 @@ const Weather: FunctionComponent = () => {
         <div className="todays-weather-container">
           {loadError ? (
             <div className="centered-container">
-              <h3 className="unavailable">Weather Unavailable</h3>
+              <h3 className="unavailable">An Error Occurred</h3>
               <div onClick={loadWeatherForecast}>
-                <h4 className=" retry clickable">Retry</h4>
+                <h4 className="retry clickable">Retry</h4>
+              </div>
+            </div>
+          ) : forecastUnavailable ? (
+            <div className="centered-container">
+              <h3 className="unavailable">Weather Unavailable for this Location</h3>
+              <div onClick={loadWeatherForecast}>
+                <h4 className="retry clickable">Retry</h4>
               </div>
             </div>
           ) : !weatherForecast || isSearching ? (
