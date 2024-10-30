@@ -38,7 +38,7 @@ const Index = () => {
       );
       new HttpResponseMessage(weatherResponse).throwIfNotSuccessful();
 
-      let forecast = weatherResponse.data as WeatherForecast;
+      const forecast = weatherResponse.data as WeatherForecast;
 
       // Set currentConditions property to associated object from days array
       forecast.currentConditions = { ...forecast.days[0] } as Conditions;
@@ -85,7 +85,7 @@ const Index = () => {
           </div>
         </div>
         <div id="todays-weather-container" className="todays-weather-container">
-          {!!loadError ? (
+          {loadError ? (
             <>
               <h3>Weather Unavailable</h3>
               <div onClick={loadWeatherForecast} style={{ marginTop: '8px' }}>
@@ -124,7 +124,7 @@ const Index = () => {
                 }}
               >
                 <h1>
-                  {!!weatherForecast?.currentConditions.temp
+                  {weatherForecast?.currentConditions.temp
                     ? Math.round(weatherForecast?.currentConditions.temp)
                     : 'Unknown'}
                 </h1>
