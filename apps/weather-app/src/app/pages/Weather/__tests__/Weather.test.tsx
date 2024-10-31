@@ -245,7 +245,6 @@ describe('Weather', () => {
     await waitFor(() => expect(queryByTestId('weather-page')).toBeTruthy());
     await waitFor(() => expect(queryByTestId('search-input')).toBeTruthy());
     await waitFor(() => expect(queryByTestId('search-button')).toBeTruthy());
-    await waitFor(() => expect(queryByTestId('error-container')).toBeFalsy());
     await waitFor(() => expect(queryByTestId('unavailable-container')).toBeFalsy());
     await waitFor(() => expect(getByTestId('primary-location').textContent).toEqual('Nelson'));
     await waitFor(() => expect(getByTestId('secondary-location').textContent).toEqual('Tasman, New Zealand'));
@@ -271,7 +270,7 @@ describe('Weather', () => {
     await waitFor(() => expect(queryByTestId('conditions-tile-5')).toBeFalsy());
   });
 
-  it('will show error message if error response is received', async () => {
+  it('will show unavailable message if error response is received', async () => {
     mockGetWeatherByLocation.mockResolvedValue({
       status: 400,
     });
@@ -279,8 +278,9 @@ describe('Weather', () => {
     const { queryByTestId } = render(<Weather />);
 
     await waitFor(() => expect(queryByTestId('activity-indicator')).toBeNull());
-    await waitFor(() => expect(queryByTestId('error-container')).toBeTruthy());
-    await waitFor(() => expect(queryByTestId('error-retry-button')).toBeTruthy());
+    await waitFor(() => expect(queryByTestId('unavailable-container')).toBeTruthy());
+    await waitFor(() => expect(queryByTestId('unavailable-retry-button')).toBeTruthy());
+    await waitFor(() => expect(queryByTestId('overview-container')).toBeFalsy());
   });
 
   it('will show weather unavailable message if no data is returned', async () => {
@@ -294,6 +294,7 @@ describe('Weather', () => {
     await waitFor(() => expect(queryByTestId('activity-indicator')).toBeNull());
     await waitFor(() => expect(queryByTestId('unavailable-container')).toBeTruthy());
     await waitFor(() => expect(queryByTestId('unavailable-retry-button')).toBeTruthy());
+    await waitFor(() => expect(queryByTestId('overview-container')).toBeFalsy());
   });
 
   it('will change temperature unit', async () => {
@@ -360,7 +361,7 @@ describe('Weather', () => {
     );
   });
 
-  it('will retry successfully after error', async () => {
+  it('will retry successfully after unavailable due to error response', async () => {
     mockGetWeatherByLocation
       .mockResolvedValueOnce({
         status: 400,
@@ -374,16 +375,18 @@ describe('Weather', () => {
     const { queryByTestId, getByTestId } = render(<Weather />);
 
     await waitFor(() => expect(queryByTestId('activity-indicator')).toBeNull());
-    await waitFor(() => expect(queryByTestId('error-container')).toBeTruthy());
-    await waitFor(() => expect(queryByTestId('error-retry-button')).toBeTruthy());
+    await waitFor(() => expect(queryByTestId('unavailable-container')).toBeTruthy());
+    await waitFor(() => expect(queryByTestId('unavailable-retry-button')).toBeTruthy());
+    await waitFor(() => expect(queryByTestId('overview-container')).toBeFalsy());
 
-    await waitFor(() => fireEvent.click(getByTestId('error-retry-button')));
+    await waitFor(() => fireEvent.click(getByTestId('unavailable-retry-button')));
 
     await waitFor(() => expect(getByTestId('primary-location').textContent).toEqual('Nelson'));
     await waitFor(() => expect(getByTestId('secondary-location').textContent).toEqual('Tasman, New Zealand'));
+    await waitFor(() => expect(queryByTestId('overview-container')).toBeTruthy());
   });
 
-  it('will retry successfully after weather unavailable', async () => {
+  it('will retry successfully after unavailable due to empty data', async () => {
     mockGetWeatherByLocation
       .mockResolvedValueOnce({
         status: 200,
@@ -399,10 +402,12 @@ describe('Weather', () => {
     await waitFor(() => expect(queryByTestId('activity-indicator')).toBeNull());
     await waitFor(() => expect(queryByTestId('unavailable-container')).toBeTruthy());
     await waitFor(() => expect(queryByTestId('unavailable-retry-button')).toBeTruthy());
+    await waitFor(() => expect(queryByTestId('overview-container')).toBeFalsy());
 
     await waitFor(() => fireEvent.click(getByTestId('unavailable-retry-button')));
 
     await waitFor(() => expect(getByTestId('primary-location').textContent).toEqual('Nelson'));
     await waitFor(() => expect(getByTestId('secondary-location').textContent).toEqual('Tasman, New Zealand'));
+    await waitFor(() => expect(queryByTestId('overview-container')).toBeTruthy());
   });
 });

@@ -22,22 +22,21 @@ const Weather: FunctionComponent = () => {
   const [temperatureUnit, setTemperatureUnit] = useState(TemperatureUnit.Celcius);
   const [weatherForecast, setWeatherForecast] = useState<WeatherForecast | null>(null);
   const [isSearching, setIsSearching] = useState(false);
-  const [overviewIsVisible, setOverviewIsVisible] = useState(false);
   const [forecastUnavailable, setForecastUnavailable] = useState(false);
-  const [loadError, setLoadError] = useState<unknown>(null);
 
   // Extract initial location and number of upcoming days to forecast for easy editing
   const initialLocation = 'Brighton';
   const numDatesToDisplay = 5;
 
-  const loadWeatherForecast = async (): Promise<void> => {
+  const loadWeatherForecast = async (hideOverview: boolean = true): Promise<void> => {
     // If nothing is in the search box just search initial location
     const searchLocation = location.trim() === '' ? initialLocation : location;
 
     // Stop showing error/unavailable and start showing loading indicator
-    setLoadError(false);
     setForecastUnavailable(false);
-    setIsSearching(true);
+    if (hideOverview) {
+      setIsSearching(true);
+    }
 
     try {
       const weatherResponse: IHttpResponseMessage = await new TimelineClient().getWeatherByLocation(
@@ -65,11 +64,10 @@ const Weather: FunctionComponent = () => {
 
         // Load forecast into state and show overview column
         setWeatherForecast(forecast);
-        setOverviewIsVisible(true);
       }
     } catch (error) {
-      // Store error in state for use in render tree
-      setLoadError(error);
+      // update forcast unavailable state
+      setForecastUnavailable(true);
     }
 
     // Stop searching whether successful or otherwise
@@ -79,7 +77,13 @@ const Weather: FunctionComponent = () => {
   useEffect(() => {
     // Self calling async function to load weather forecast on init and on temperature unit change
     (async () => {
-      await loadWeatherForecast();
+      if (!weatherForecast) {
+        // First load
+        await loadWeatherForecast();
+      } else {
+        // Don't hide data on temperature change
+        await loadWeatherForecast(false);
+      }
     })();
   }, [temperatureUnit]);
 
@@ -113,17 +117,10 @@ const Weather: FunctionComponent = () => {
           </IconButton>
         </div>
         <div className="todays-weather-container">
-          {loadError ? (
-            <div data-testid="error-container" className="centered-container">
-              <h3 className="unavailable">An Error Occurred</h3>
-              <div data-testid="error-retry-button" onClick={loadWeatherForecast}>
-                <h4 className="retry clickable">Retry</h4>
-              </div>
-            </div>
-          ) : forecastUnavailable ? (
+          {forecastUnavailable ? (
             <div data-testid="unavailable-container" className="centered-container">
-              <h3 className="unavailable">Weather Unavailable for this Location</h3>
-              <div data-testid="unavailable-retry-button" onClick={loadWeatherForecast}>
+              <h3 className="unavailable">Weather Unavailable</h3>
+              <div data-testid="unavailable-retry-button" onClick={() => loadWeatherForecast()}>
                 <h4 className="retry clickable">Retry</h4>
               </div>
             </div>
@@ -163,7 +160,7 @@ const Weather: FunctionComponent = () => {
         </div>
       </div>
       <div className="column right-column">
-        {weatherForecast && overviewIsVisible && (
+        {!forecastUnavailable && !isSearching && weatherForecast && (
           <div data-testid="overview-container" className="overview-container">
             <div className="overview-header-row">
               <h3>Day Overview</h3>
