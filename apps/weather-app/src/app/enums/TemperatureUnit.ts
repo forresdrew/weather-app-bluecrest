@@ -1,18 +1,18 @@
 // Enum to store metrics for API call
-enum Unit {
+enum TemperatureUnit {
   Celcius = 'metric',
   Fahrenheit = 'us',
 }
 
 // Extendable switch case function for unit symbols in case we want to add more in future
-export const getTemperatureUnitSymbol = (unit: Unit): string => {
+export const getTemperatureUnitSymbol = (unit: TemperatureUnit | undefined | null): string => {
   let symbol = '';
 
   switch (unit) {
-    case Unit.Celcius:
+    case TemperatureUnit.Celcius:
       symbol = 'C';
       break;
-    case Unit.Fahrenheit:
+    case TemperatureUnit.Fahrenheit:
       symbol = 'F';
       break;
     default:
@@ -22,4 +22,4 @@ export const getTemperatureUnitSymbol = (unit: Unit): string => {
   return symbol;
 };
 
-export default Unit;
+export default TemperatureUnit;

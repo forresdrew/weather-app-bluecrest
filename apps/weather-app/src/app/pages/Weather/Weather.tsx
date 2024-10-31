@@ -6,7 +6,7 @@ import { HiArrowRight } from 'react-icons/hi';
 import Image from 'next/image';
 import TimelineClient from '../../api/TimelineClient';
 import { HttpResponseMessage, IHttpResponseMessage } from '../../models/HttpResponseMessage';
-import Unit, { getTemperatureUnitSymbol } from '../../enums/Unit';
+import TemperatureUnit, { getTemperatureUnitSymbol } from '../../enums/TemperatureUnit';
 import WeatherForecast from '../../models/WeatherForecast';
 import DateUtils from '../../utils/DateUtils';
 import StringUtils from '../../utils/StringUtils';
@@ -19,7 +19,7 @@ import ConditionsTile from '../../components/ConditionsTile/ConditionsTile';
 
 const Weather: FunctionComponent = () => {
   const [location, setLocation] = useState('');
-  const [temperatureUnit, setTemperatureUnit] = useState(Unit.Celcius);
+  const [temperatureUnit, setTemperatureUnit] = useState(TemperatureUnit.Celcius);
   const [weatherForecast, setWeatherForecast] = useState<WeatherForecast | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [overviewIsVisible, setOverviewIsVisible] = useState(false);
@@ -99,43 +99,52 @@ const Weather: FunctionComponent = () => {
   };
 
   return (
-    <div className="container">
+    <div data-testid="weather-page" className="container">
       <div className="column left-column">
         <div className="search-row">
-          <input value={location} onChange={onLocationChanged} placeholder="Enter a Location..." />
-          <IconButton onClick={onSearchClicked}>
+          <input
+            data-testid="search-input"
+            value={location}
+            onChange={onLocationChanged}
+            placeholder="Enter a Location..."
+          />
+          <IconButton testId="search-button" onClick={onSearchClicked}>
             <HiArrowRight size={16} />
           </IconButton>
         </div>
         <div className="todays-weather-container">
           {loadError ? (
-            <div className="centered-container">
+            <div data-testid="error-container" className="centered-container">
               <h3 className="unavailable">An Error Occurred</h3>
-              <div onClick={loadWeatherForecast}>
+              <div data-testid="error-retry-button" onClick={loadWeatherForecast}>
                 <h4 className="retry clickable">Retry</h4>
               </div>
             </div>
           ) : forecastUnavailable ? (
-            <div className="centered-container">
+            <div data-testid="unavailable-container" className="centered-container">
               <h3 className="unavailable">Weather Unavailable for this Location</h3>
-              <div onClick={loadWeatherForecast}>
+              <div data-testid="unavailable-retry-button" onClick={loadWeatherForecast}>
                 <h4 className="retry clickable">Retry</h4>
               </div>
             </div>
           ) : !weatherForecast || isSearching ? (
-            <div className="centered-container">
+            <div data-testid="activity-indicator" className="centered-container">
               <div className="activity-indicator" />
             </div>
           ) : (
             <>
               <div className="location-date-container">
                 <div className="location-container">
-                  <h2>{StringUtils.splitLocationString(weatherForecast?.resolvedAddress)[0]}</h2>
-                  <h4>{StringUtils.splitLocationString(weatherForecast?.resolvedAddress)[1]}</h4>
+                  <h2 data-testid="primary-location">
+                    {StringUtils.splitLocationString(weatherForecast?.resolvedAddress)[0]}
+                  </h2>
+                  <h4 data-testid="secondary-location">
+                    {StringUtils.splitLocationString(weatherForecast?.resolvedAddress)[1]}
+                  </h4>
                 </div>
-                <h3>{DateUtils.formatDateDDDddMMM(new Date())}</h3>
+                <h3 data-testid="current-date">{DateUtils.formatDateDDDddMMM(new Date())}</h3>
               </div>
-              <div className="weather-image-container">
+              <div data-testid="current-conditions-svg" className="weather-image-container">
                 <Image
                   className="weather-image"
                   src={require(`../../assets/images/${weatherForecast.currentConditions.icon ?? 'clear-day'}.svg`)}
@@ -144,10 +153,10 @@ const Weather: FunctionComponent = () => {
               </div>
               <div>
                 <div className="today-temp-row">
-                  <h1>{Math.round(weatherForecast.currentConditions.temp ?? 0)}</h1>
-                  <h3>°{getTemperatureUnitSymbol(temperatureUnit)}</h3>
+                  <h1 data-testid="current-temp">{Math.round(weatherForecast.currentConditions.temp ?? 0)}</h1>
+                  <h3 data-testid="current-temp-unit">°{getTemperatureUnitSymbol(temperatureUnit)}</h3>
                 </div>
-                <h3>{weatherForecast.currentConditions.conditions}</h3>
+                <h3 data-testid="current-conditions">{weatherForecast.currentConditions.conditions}</h3>
               </div>
             </>
           )}
@@ -155,25 +164,32 @@ const Weather: FunctionComponent = () => {
       </div>
       <div className="column right-column">
         {weatherForecast && overviewIsVisible && (
-          <div className="overview-container">
+          <div data-testid="overview-container" className="overview-container">
             <div className="overview-header-row">
               <h3>Day Overview</h3>
               <div className="unit-buttons-row">
                 <SwitchButton
+                  testId="celcius-button"
                   label="°C"
-                  isActive={temperatureUnit === Unit.Celcius}
-                  onClick={() => setTemperatureUnit(Unit.Celcius)}
+                  isActive={temperatureUnit === TemperatureUnit.Celcius}
+                  onClick={() => setTemperatureUnit(TemperatureUnit.Celcius)}
                 />
                 <SwitchButton
+                  testId="fahrenheit-button"
                   label="°F"
-                  isActive={temperatureUnit === Unit.Fahrenheit}
-                  onClick={() => setTemperatureUnit(Unit.Fahrenheit)}
+                  isActive={temperatureUnit === TemperatureUnit.Fahrenheit}
+                  onClick={() => setTemperatureUnit(TemperatureUnit.Fahrenheit)}
                 />
               </div>
             </div>
             <div className="overview-row-1">
-              <PercentageIndicator label="Humidity" value={weatherForecast?.currentConditions.humidity} />
               <PercentageIndicator
+                testId="humidity-percentage"
+                label="Humidity"
+                value={weatherForecast?.currentConditions.humidity}
+              />
+              <PercentageIndicator
+                testId="cloud-cover-percentage"
                 label="Cloud Cover"
                 value={weatherForecast.currentConditions.cloudcover}
                 barColor="#FF991B"
@@ -182,19 +198,29 @@ const Weather: FunctionComponent = () => {
             <div className="overview-row-2">
               <div className="box-sub-row">
                 <InfoBox
+                  testId="min-temp-box"
                   label="Min temp."
                   value={Math.round(weatherForecast.currentConditions.tempmin ?? 0).toString()}
                   unit={temperatureUnit}
                 />
                 <InfoBox
+                  testId="max-temp-box"
                   label="Max temp."
                   value={Math.round(weatherForecast.currentConditions.tempmax ?? 0).toString()}
                   unit={temperatureUnit}
                 />
               </div>
               <div className="box-sub-row">
-                <InfoBox label="Sunrise" value={weatherForecast.currentConditions.sunrise.substring(0, 5)} />
-                <InfoBox label="Sunset" value={weatherForecast.currentConditions.sunset.substring(0, 5)} />
+                <InfoBox
+                  testId="sunrise-box"
+                  label="Sunrise"
+                  value={weatherForecast.currentConditions.sunrise.substring(0, 5)}
+                />
+                <InfoBox
+                  testId="sunset-box"
+                  label="Sunset"
+                  value={weatherForecast.currentConditions.sunset.substring(0, 5)}
+                />
               </div>
             </div>
             <div className="forecast-header">
@@ -202,7 +228,14 @@ const Weather: FunctionComponent = () => {
             </div>
             <div className="five-day-row">
               {weatherForecast.days.map((conditions, index) => {
-                return <ConditionsTile key={index} conditions={conditions} unit={temperatureUnit} />;
+                return (
+                  <ConditionsTile
+                    testId={`conditions-tile-${index}`}
+                    key={index}
+                    conditions={conditions}
+                    unit={temperatureUnit}
+                  />
+                );
               })}
             </div>
           </div>

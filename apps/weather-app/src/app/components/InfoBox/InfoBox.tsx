@@ -1,24 +1,25 @@
 import './InfoBox.css';
-import Unit, { getTemperatureUnitSymbol } from '../../enums/Unit';
+import TemperatureUnit, { getTemperatureUnitSymbol } from '../../enums/TemperatureUnit';
 import { FunctionComponent } from 'react';
 
 type InfoBoxProps = {
   label: string;
   value: string;
-  unit?: Unit;
+  unit?: TemperatureUnit;
+  testId?: string;
 };
 
 // Reusable component to display a value in a labelled box. Will append unit symbol if a unit is provided
-const InfoBox: FunctionComponent<InfoBoxProps> = ({ label, value, unit }) => {
+const InfoBox: FunctionComponent<InfoBoxProps> = ({ label, value, unit, testId }) => {
   return (
-    <div className="box">
+    <div data-testid={testId} className="box">
       <div className="full-height-container">
         <div className="flex">
-          <h4>{label}</h4>
+          <h4 data-testid={`${testId}-label`}>{label}</h4>
         </div>
         <div className="value">
-          <h3>{value}</h3>
-          {unit && <h4>°{getTemperatureUnitSymbol(unit)}</h4>}
+          <h3 data-testid={`${testId}-value`}>{value}</h3>
+          {unit && <h4 data-testid={`${testId}-unit`}>°{getTemperatureUnitSymbol(unit)}</h4>}
         </div>
       </div>
     </div>

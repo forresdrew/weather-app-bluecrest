@@ -5,10 +5,11 @@ type PercentageIndicatorProps = {
   label: string;
   value: number;
   barColor?: string;
+  testId?: string;
 };
 
 // Reusable component to render % indicator. Will use default color if none is provided in props
-const PercentageIndicator: FunctionComponent<PercentageIndicatorProps> = ({ label, value, barColor }) => {
+const PercentageIndicator: FunctionComponent<PercentageIndicatorProps> = ({ label, value, barColor, testId }) => {
   // Round value and make sure it is not great than max %
   let roundedValue = Math.round(value);
   if (roundedValue > 100) {
@@ -16,11 +17,13 @@ const PercentageIndicator: FunctionComponent<PercentageIndicatorProps> = ({ labe
   }
 
   return (
-    <div className="box">
-      <h4>{label}</h4>
+    <div data-testid={testId} className="box">
+      <h4 data-testid={`${testId}-label`}>{label}</h4>
       <div className="value-row">
         <div className="fixed-width" />
-        <h3 className="value">{roundedValue}%</h3>
+        <h3 data-testid={`${testId}-value`} className="value">
+          {roundedValue}%
+        </h3>
         <div className="fixed-width">
           <p>%</p>
         </div>

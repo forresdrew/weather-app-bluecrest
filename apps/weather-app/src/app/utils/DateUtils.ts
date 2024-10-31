@@ -1,8 +1,8 @@
 // Extendable class of static methods for formatting and processing dates
 class DateUtils {
   // Format date for display purposes
-  public static formatDateDDDddMMM = (dateToFormat: Date): string => {
-    if (isNaN(dateToFormat?.getTime())) {
+  public static formatDateDDDddMMM = (dateToFormat: Date | undefined | null): string => {
+    if (!dateToFormat || isNaN(dateToFormat.getTime())) {
       return 'Invalid Date';
     }
 

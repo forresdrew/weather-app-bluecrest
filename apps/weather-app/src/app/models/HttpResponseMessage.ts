@@ -4,7 +4,6 @@ export interface IHttpResponseMessage {
   data?: any;
 }
 
-//
 export class HttpResponseMessage implements IHttpResponseMessage {
   status!: number;
   data?: unknown;
