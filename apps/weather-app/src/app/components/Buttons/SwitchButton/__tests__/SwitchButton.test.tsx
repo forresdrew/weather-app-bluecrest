@@ -4,7 +4,14 @@ import SwitchButton from '../SwitchButton';
 describe('SwitchButton', () => {
   it('will render', async () => {
     const { getByTestId, queryByTestId } = render(
-      <SwitchButton testId="switch-button" label="My Button" isActive={false} onClick={async () => {}} />
+      <SwitchButton
+        testId="switch-button"
+        label="My Button"
+        isActive={false}
+        onClick={async () => {
+          //intentionally left empty
+        }}
+      />
     );
 
     await waitFor(() => expect(queryByTestId('switch-button')).toBeTruthy());

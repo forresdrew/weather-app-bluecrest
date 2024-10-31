@@ -1,5 +1,4 @@
 import { render, waitFor } from '@testing-library/react';
-
 import InfoBox from '../InfoBox';
 import TemperatureUnit from '../../../enums/TemperatureUnit';
 
@@ -23,7 +22,7 @@ describe('InfoBox', () => {
   });
 
   it('will not display unit if no unit is provided', async () => {
-    const { getByTestId, queryByTestId } = render(<InfoBox testId="info-box" label="My Info Box" value="My Value" />);
+    const { queryByTestId } = render(<InfoBox testId="info-box" label="My Info Box" value="My Value" />);
 
     await waitFor(() => expect(queryByTestId('info-box')).toBeTruthy());
     await waitFor(() => expect(queryByTestId('info-box-unit')).toBeFalsy());

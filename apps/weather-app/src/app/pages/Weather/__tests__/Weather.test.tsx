@@ -5,7 +5,7 @@ import WeatherForecast from '../../../models/WeatherForecast';
 let weatherNelson: WeatherForecast;
 let weatherBrighton: WeatherForecast;
 
-let mockGetWeatherByLocation = jest.fn();
+const mockGetWeatherByLocation = jest.fn();
 
 beforeAll(() => {
   jest.useFakeTimers('modern' as FakeTimersConfig);

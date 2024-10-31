@@ -1,11 +1,15 @@
 import { render, waitFor } from '@testing-library/react';
-
 import IconButton from '../IconButton';
 
 describe('IconButton', () => {
   it('will render', async () => {
     const { queryByTestId } = render(
-      <IconButton testId="icon-button" onClick={async () => {}}>
+      <IconButton
+        testId="icon-button"
+        onClick={async () => {
+          // intentionally left empty
+        }}
+      >
         <></>
       </IconButton>
     );

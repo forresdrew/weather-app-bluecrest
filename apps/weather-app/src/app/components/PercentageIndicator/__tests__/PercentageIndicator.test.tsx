@@ -1,6 +1,4 @@
 import { render, waitFor } from '@testing-library/react';
-
-import TemperatureUnit from '../../../enums/TemperatureUnit';
 import PercentageIndicator from '../PercentageIndicator';
 
 describe('PercentageIndicator', () => {
