@@ -28,7 +28,7 @@ const Weather: FunctionComponent = () => {
   const initialLocation = 'Brighton';
   const numDatesToDisplay = 5;
 
-  const loadWeatherForecast = async (hideOverview: boolean = true): Promise<void> => {
+  const loadWeatherForecast = async (hideOverview = true): Promise<void> => {
     // If nothing is in the search box just search initial location
     const searchLocation = location.trim() === '' ? initialLocation : location;
 
@@ -66,7 +66,7 @@ const Weather: FunctionComponent = () => {
         setWeatherForecast(forecast);
       }
     } catch (error) {
-      // update forcast unavailable state
+      // Update forecast unavailable state
       setForecastUnavailable(true);
     }
 
